@@ -10,10 +10,10 @@
     <true/>
 
     <key>StandardErrorPath</key>
-		<string>/Users/conner/.pulse/logs/stderr.log</string>
+		<string>/Users/viccon/.pulse/logs/stderr.log</string>
 
     <key>StandardOutPath</key>
-		<string>/Users/conner/.pulse/logs/stdout.log</string>
+		<string>/Users/viccon/.pulse/logs/stdout.log</string>
 
     <key>EnvironmentVariables</key>
     <dict>
@@ -22,11 +22,11 @@
     </dict>
 
     <key>WorkingDirectory</key>
-    <string>/Users/conner</string>
+    <string>/Users/viccon</string>
 
     <key>ProgramArguments</key>
     <array>
-			<string>/Users/conner/bin/pulse-server</string>
+			<string>/Users/viccon/bin/pulse-server</string>
     </array>
 
 		<key>KeepAlive</key>

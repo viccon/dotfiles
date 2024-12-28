@@ -18,17 +18,35 @@ pbcopy < ~/.ssh/work.pub
 Clone this as a bare git repository:
 
 ```sh
-git clone --bare git@github.com:creativecreature/dotfiles.git $HOME/.cfg
+GIT_SSH_COMMAND='ssh -i $HOME/.ssh/personal -o IdentitiesOnly=yes' git clone --bare git@github.com:viccon/dotfiles.git $HOME/.cfg
 ```
 
 Checkout the bare repository content to the home directory:
 
 ```sh
-./checkout.sh
+git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 ```
 
-Run the bootstrap script to install software, create ssh keys, download oh-my-zsh, etc.
+Run the bootstrap script to install and configure everything, and then restart the computer:
 
 ```sh
 ./bootstrap.sh
+```
+
+After the reboot, install node using volta:
+
+```sh
+volta install node
+```
+
+Make fzf work with CTRL + R:
+
+```sh
+$(brew --prefix)/opt/fzf/install
+```
+
+and make it so that we don't show untracked files for this project:
+
+```sh
+config config status.showUntrackedFiles no
 ```

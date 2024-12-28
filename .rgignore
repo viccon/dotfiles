@@ -5,3 +5,21 @@ dist/
 yarn.lock
 tags
 vendor/
+
+# Ignore directories in $HOME in order to make it easier to work with a bare repo for dotfiles
+Applications
+Desktop
+Documents
+Downloads
+Music
+Movies
+Pictures
+Public
+Library
+go
+.local
+.cache
+.zsh_sessions
+.oh-my-zsh
+.npm
+.volta

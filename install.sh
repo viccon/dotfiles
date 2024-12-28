@@ -104,8 +104,6 @@ WANTED_CASKS=(
 	firefox
 	firefox-developer-edition
 	google-chrome
-	homebrew/cask-fonts/font-sf-mono
-	homebrew/cask-fonts/font-sf-pro
 	insomnia
 	kap
 	mongodb-compass
