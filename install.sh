@@ -100,6 +100,7 @@ WANTED_CASKS=(
 	1password
 	1password-cli
 	discord
+	docker
 	figma
 	firefox
 	firefox-developer-edition
