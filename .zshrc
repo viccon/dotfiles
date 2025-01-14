@@ -1,7 +1,10 @@
 export ZSH="$HOME/.oh-my-zsh"
-plugins=(git keychain gpg-agent z node npm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git keychain gpg-agent z node npm)
 
 source $ZSH/oh-my-zsh.sh
+
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Stop auto change of directory from zsh
 unsetopt AUTO_CD
