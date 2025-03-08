@@ -31,15 +31,16 @@ brew upgrade
 
 # These are the packages we want to have installed
 WANTED_PACKAGES=(
-	awscli
 	borders
 	btop
+	cmake
 	coreutils
 	direnv
 	dive
 	dockutil
 	efm-langserver
 	flyctl
+	font-hack-nerd-font
 	fzf
 	git-crypt
 	git-lfs
@@ -52,6 +53,7 @@ WANTED_PACKAGES=(
 	hugo
 	jq
 	lazygit
+	llvm
 	lua
 	ncdu
 	neovim
@@ -64,8 +66,8 @@ WANTED_PACKAGES=(
 	redis
 	ripgrep
 	rust
+	sf-symbols
 	sketchybar
-	slack
 	spotify
 	starship
 	switchaudio-osx
@@ -77,11 +79,7 @@ WANTED_PACKAGES=(
 	volta
 	websocat
 	wget
-	youtube-dl
-	sf-symbols
-	spotify
 	zsh-autosuggestions
-	font-hack-nerd-font
 	zsh-syntax-highlighting
 )
 
@@ -97,22 +95,14 @@ done
 
 # These are the casks we want to have installed
 WANTED_CASKS=(
-	1password
-	1password-cli
 	discord
 	docker
 	figma
 	firefox
-	firefox-developer-edition
 	google-chrome
-	insomnia
-	kap
-	mongodb-compass
 	monodraw
 	nikitabobko/tap/aerospace
-	nordvpn
 	obsidian
-	postman
 	redisinsight
 )
 

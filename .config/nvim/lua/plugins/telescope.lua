@@ -50,6 +50,7 @@ return {
 						["<cr>"] = custom_actions.fzf_multi_select,
 					},
 				},
+				path_display = { "truncate" },
 			},
 			pickers = {
 				find_files = {
@@ -64,6 +65,9 @@ return {
 						n = { ["<c-d>"] = require("telescope.actions").delete_buffer },
 					},
 				},
+				lsp_references = {
+					show_line = false,
+				}
 			},
 		})
 	end,

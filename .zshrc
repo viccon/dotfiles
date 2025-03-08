@@ -103,6 +103,31 @@ ensure_tmux_is_running() {
 }
 ensure_tmux_is_running
 
+# CPP
+cpprun() {
+  if [ -z "$1" ]; then
+    echo "Usage: cpprun <filename.cpp>"
+    return 1
+  fi
+
+  filename=$(basename "$1" .cpp)
+
+  # Compile and run only if compilation succeeds
+  if clang++ -std=c++20 -Wall "$1" -o "$filename"; then
+    ./"$filename"
+    local exit_status=$?
+
+    # Clean up the binary
+    rm "$filename"
+
+    # Return the original exit status of the program
+    return $exit_status
+  else
+    # Return the compilation error status
+    return $?
+  fi
+}
+
 # enable zmv
 autoload zmv
 fpath=($fpath "/home/conner/.zfunctions")

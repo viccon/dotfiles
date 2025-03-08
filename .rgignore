@@ -3,6 +3,7 @@ node_modules/
 build/
 dist/
 yarn.lock
+.yarn
 tags
 vendor/
 
