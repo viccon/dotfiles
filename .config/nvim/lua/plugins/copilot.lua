@@ -1,5 +1,5 @@
 return {
-		"zbirenbaum/copilot.lua",
+	"zbirenbaum/copilot.lua",
 	config = function()
 		local copilot = require("copilot")
 		copilot.setup({

@@ -30,6 +30,9 @@ bindkey '^ ' autosuggest-accept
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# Add mono to the path
+export PATH="/Library/Frameworks/Mono.framework/Versions/Current/bin:$PATH"
+
 export PATH="$HOME/code/work/tv4-infrastructure/bin:$PATH"
 
 # Golang
@@ -104,6 +107,9 @@ ensure_tmux_is_running() {
 ensure_tmux_is_running
 
 # CPP
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+export LIBRARY_PATH="$LIBRARY_PATH:$SDKROOT/usr/lib"
 cpprun() {
   if [ -z "$1" ]; then
     echo "Usage: cpprun <filename.cpp>"

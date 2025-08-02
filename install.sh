@@ -33,7 +33,7 @@ brew upgrade
 WANTED_PACKAGES=(
 	borders
 	btop
-	cmake
+	ccache
 	coreutils
 	direnv
 	dive
@@ -95,6 +95,7 @@ done
 
 # These are the casks we want to have installed
 WANTED_CASKS=(
+	cmake
 	discord
 	docker
 	figma

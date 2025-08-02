@@ -1,6 +1,10 @@
 # OSX
 .DS_Store
 
+# Minecraft
+.cache/
+compile_commands.json
+
 # LOCALDEV - Where I put my things to sometimes modify local dev experience
 LOCALDEV
 

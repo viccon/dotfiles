@@ -41,6 +41,41 @@ return {
 					telemetry = { enable = false },
 				},
 			},
+			-- clangd = {
+			-- 	cmd = {
+			-- 		"clangd",
+			-- 		"--background-index",
+			-- 		"--clang-tidy",
+			-- 		"--header-insertion=iwyu",
+			-- 		"--completion-style=detailed",
+			-- 		"--function-arg-placeholders",
+			-- 		"--limit-references=0",
+			-- 		"--limit-results=0",
+			-- 		"--rename-file-limit=0",
+			-- 		"--fallback-style=llvm",
+			-- 	},
+			-- },
+		}
+
+		local clangd = {
+			-- cmd = {
+			-- 	"clangd",
+			-- 	"--background-index",
+			-- 	"--clang-tidy",
+			-- 	"--header-insertion=iwyu",
+			-- 	"--completion-style=detailed",
+			-- 	"--function-arg-placeholders",
+			-- 	"--limit-references=0",
+			-- 	"--limit-results=0",
+			-- 	"--rename-file-limit=0",
+			-- 	"--fallback-style=llvm",
+			-- },
+			cmd = {
+				"clangd",
+				"--clang-tidy",
+				"--completion-style=detailed",
+				"--function-arg-placeholders",
+			},
 		}
 
 		mason_lspconfig.setup({
@@ -60,6 +95,13 @@ return {
 					settings = servers[server_name],
 				})
 			end,
+		})
+
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		require("lspconfig")["clangd"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = clangd,
 		})
 
 		-- Automatically update diagnostics
