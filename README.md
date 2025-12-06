@@ -50,3 +50,8 @@ and make it so that we don't show untracked files for this project:
 ```sh
 config config status.showUntrackedFiles no
 ```
+
+Install the icon font for sketchybar:
+```sh
+curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+```
