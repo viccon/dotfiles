@@ -29,6 +29,12 @@ api.nvim_create_autocmd("BufEnter", {
 	command = "setlocal spell spelllang=en_us",
 })
 
+-- Set filetype to cmake for
+api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "CmakeLists.txt"},
+	command = "set ft=cmake",
+})
+
 -- Set filetype to json for various configuration files
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { ".eslintrc", ".jscsrc", ".jshintrc", ".babelrc" },

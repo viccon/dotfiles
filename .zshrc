@@ -112,24 +112,44 @@ export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 export LIBRARY_PATH="$LIBRARY_PATH:$SDKROOT/usr/lib"
 cpprun() {
   if [ -z "$1" ]; then
-    echo "Usage: cpprun <filename.cpp>"
+    echo "Usage: cpprun <main_filename.cpp>"
     return 1
   fi
 
-  filename=$(basename "$1" .cpp)
+  main_file="$1"
+  filename=$(basename "$main_file" .cpp)
 
-  # Compile and run only if compilation succeeds
-  if clang++ -std=c++20 -Wall "$1" -o "$filename"; then
+  # Find all .cpp files in the current directory and subdirectories
+  cpp_files=($(find . -name "*.cpp"))
+
+  # Check if object files already exist (for incremental compilation)
+  obj_dir="./build"
+  mkdir -p "$obj_dir"
+
+  # Convert .cpp files to .o files in the build directory
+  obj_files=()
+  for cpp in "${cpp_files[@]}"; do
+    obj="${obj_dir}/$(basename "${cpp}" .cpp).o"
+    obj_files+=("$obj")
+
+    # Compile only if .o file is missing or .cpp is newer
+    if [ ! -f "$obj" ] || [ "$cpp" -nt "$obj" ]; then
+      echo "Compiling $cpp..."
+      clang++ -std=c++20 -Wall -fno-elide-constructors -c "$cpp" -o "$obj" || return $?
+    fi
+  done
+
+  # Link all object files into the final binary
+  echo "Linking..."
+  if clang++ -std=c++20 -Wall "${obj_files[@]}" -o "$filename"; then
+    echo "Running $filename..."
     ./"$filename"
     local exit_status=$?
 
-    # Clean up the binary
     rm "$filename"
 
-    # Return the original exit status of the program
     return $exit_status
   else
-    # Return the compilation error status
     return $?
   fi
 }

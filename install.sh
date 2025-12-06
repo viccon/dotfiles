@@ -70,6 +70,7 @@ WANTED_PACKAGES=(
 	sketchybar
 	spotify
 	starship
+	stow
 	switchaudio-osx
 	tfenv
 	tig
