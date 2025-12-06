@@ -1,6 +1,9 @@
 return {
 	"folke/todo-comments.nvim",
 	dependencies = "nvim-telescope/telescope.nvim",
+	keys = {
+		{ "|", "<cmd>TodoTelescope<CR>", desc = "Search TODOs" },
+	},
 	config = function()
 		require("todo-comments").setup({
 			signs = true, -- show icons in the signs column

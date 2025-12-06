@@ -1,5 +1,9 @@
 return {
 	"kyazdani42/nvim-tree.lua",
+	keys = {
+		{ "<F2>", "<cmd>NvimTreeFindFileToggle!<CR>", desc = "Find file in tree" },
+		{ "<F3>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },
+	},
 	config = function()
 		-- live grep using Telescope inside the current directory under
 		-- the cursor (or the parent directory of the current file)
@@ -24,13 +28,7 @@ return {
 				return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
 			end
 
-			local function cmd(str)
-				return "<cmd>" .. str .. "<CR>"
-			end
-
 			-- BEGIN_DEFAULT_ON_ATTACH
-			vim.keymap.set({ "n" }, "<F2>", cmd("NvimTreeFindFileToggle!"), { silent = true })
-			vim.keymap.set({ "n" }, "<F3>", cmd("NvimTreeToggle"), { silent = true })
 			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
 			vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
 			vim.keymap.set("n", "<C-k>", api.node.show_info_popup, opts("Info"))

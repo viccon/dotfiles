@@ -87,8 +87,6 @@ return {
 				if server_name == "tsserver" then
 					server_name = "ts_ls"
 				end
-				local capabilities = vim.lsp.protocol.make_client_capabilities()
-				capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 				require("lspconfig")[server_name].setup({
 					capabilities = capabilities,
 					on_attach = on_attach,
@@ -97,28 +95,19 @@ return {
 			end,
 		})
 
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		require("lspconfig")["clangd"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = clangd,
 		})
 
-		-- Automatically update diagnostics
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		-- Configure diagnostics display
+		vim.diagnostic.config({
 			underline = true,
 			update_in_insert = false,
 			virtual_text = false,
 			severity_sort = true,
 			signs = true,
-			source = true,
-			format = function(diagnostics)
-				local result = {}
-				for i, diagnostic in ipairs(diagnostics) do
-					result[i] = string.format("%s: %s", diagnostic.source, diagnostic.message)
-				end
-				return result
-			end,
 		})
 
 		vim.filetype.add({ extension = { templ = "templ" } })
@@ -185,7 +174,7 @@ return {
 				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 
 				-- make gq work with lsp
-				vim.api.nvim_buf_set_option(ev.buf, "formatexpr", "")
+				vim.bo[ev.buf].formatexpr = ""
 			end,
 		})
 

@@ -1,6 +1,11 @@
 return {
 	"vim-test/vim-test",
 	dependencies = { "preservim/vimux" },
+	keys = {
+		{ "tn", "<cmd>TestNearest<CR>", desc = "Test nearest" },
+		{ "tf", "<cmd>TestFile<CR>", desc = "Test file" },
+		{ "ts", "<cmd>TestSuite<CR>", desc = "Test suite" },
+	},
 	config = function()
 		vim.cmd([[
   let g:test#javascript#runner = 'jest'

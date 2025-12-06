@@ -1,133 +1,58 @@
-local function cmd(str)
-	return "<cmd>" .. str .. "<CR>"
-end
-
--- Use space as leader key
+-- Leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Helper for cleaner keymap definitions
+local function map(mode, lhs, rhs, desc)
+	vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+end
 
 -- =============================================================================
 -- === NORMAL MODE =============================================================
 -- =============================================================================
--- Toggle list chars
-vim.keymap.set({ "n" }, "<Leader><tab>", ":set list!<CR>", { silent = true })
 
--- Yank Line
-vim.keymap.set({ "n" }, "Y", "y$", { silent = true })
+map("n", "<Leader><tab>", "<cmd>set list!<CR>", "Toggle list chars")
+map("n", "Y", "y$", "Yank to end of line")
+map("n", "cp", '<cmd>let @* = expand("%")<CR>', "Copy file path to clipboard")
+map("n", "n", "nzzzv", "Next search result (centered)")
+map("n", "N", "Nzzzv", "Previous search result (centered)")
+map("n", "J", "mzJ`z", "Join lines (cursor stays)")
+map("n", ",x", "<cmd>split<CR>", "Horizontal split")
+map("n", ",v", "<cmd>vsplit<CR>", "Vertical split")
+map("n", ",<space>", "<cmd>noh<CR>", "Clear search highlight")
 
--- Copy path to buffer
-vim.keymap.set({ "n" }, "cp", ':let @* = expand("%")<CR>', { silent = true })
-
--- Search will center on the line it found
-vim.keymap.set({ "n" }, "n", "nzzzv", { silent = true })
-vim.keymap.set({ "n" }, "N", "Nzzzv", { silent = true })
-
--- Don't move the cursor when joining lines.
-vim.keymap.set({ "n" }, "J", "mzJ`z", { silent = true })
-
--- Split
-vim.keymap.set({ "n" }, ",x", ":<C-u>split<CR>", { silent = true })
-vim.keymap.set({ "n" }, ",v", ":<C-u>vsplit<CR>", { silent = true })
-
--- Clean search highlight
-vim.keymap.set({ "n" }, ",<space>", ":noh<CR>", { silent = true })
-
--- Navigate diagnostics
-vim.keymap.set({ "n" }, "<A-[>", cmd("lua vim.diagnostic.goto_prev()"), { silent = true })
-vim.keymap.set({ "n" }, "<A-]>", cmd("lua vim.diagnostic.goto_next()"), { silent = true })
-
--- =============================================================================
--- === NORMAL MODE PLUGINS =====================================================
--- =============================================================================
-
-vim.keymap.set({ "n" }, "<F2>", cmd("NvimTreeFindFileToggle!"), { silent = true })
-vim.keymap.set({ "n" }, "<F3>", cmd("NvimTreeToggle"), { silent = true })
-
--- Telescope
-local find_command = "{ 'rg', '--files', '--hidden', '-g', '!node_modules/**', '-g', '!.git/**', }"
-vim.keymap.set({ "n" }, "<Leader>b", cmd("Telescope buffers"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>fa", cmd("Telescope live_grep"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>ff", cmd("Telescope find_files"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>ds", cmd("Telescope lsp_document_symbols"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>sd", cmd("Telescope diagnostics"), { silent = true })
-vim.keymap.set({ "n" }, "gr", cmd("lua require'telescope.builtin'.lsp_references{}"), { silent = true })
-vim.keymap.set({ "n" }, "gd", cmd("lua require'telescope.builtin'.lsp_definitions{}"), { silent = true })
-vim.keymap.set(
-	{ "n" },
-	"gD",
-	cmd("lua require'telescope.builtin'.lsp_definitions{jump_type = \"vsplit\"}"),
-	{ silent = true }
-)
-vim.keymap.set(
-	{ "n" },
-	"gX",
-	cmd("lua require'telescope.builtin'.lsp_definitions{jump_type = \"split\"}"),
-	{ silent = true }
-)
-vim.keymap.set(
-	{ "n" },
-	"<C-p>",
-	cmd("lua require('telescope.builtin').find_files({find_command = " .. find_command .. " })"),
-	{ silent = true }
-)
-vim.keymap.set({ "n" }, "\\", cmd("Telescope buffers"), { silent = true })
-vim.keymap.set(
-	{ "n" },
-	"<Leader>/",
-	cmd('lua require("telescope").extensions.live_grep_args.live_grep_args()'),
-	{ silent = true }
-)
-
--- Todo comments
-vim.keymap.set({ "n" }, "|", cmd("TodoTelescope"), { silent = true })
-
--- Fugitive
-vim.keymap.set({ "n" }, "<Leader>gs", cmd("G"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>gd", cmd("Gvdiffsplit"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>gp", cmd("Git pull"), { silent = true })
-vim.keymap.set({ "n" }, "<Leader>gh", cmd("0Gclog"), { silent = true })
-vim.keymap.set({ "n" }, "dv", cmd("Gdiff"), { silent = true })
-
--- Git worktree
-vim.keymap.set(
-	{ "n" },
-	"<Leader>gw",
-	cmd("lua require('telescope').extensions.git_worktree.git_worktrees()"),
-	{ silent = true }
-)
-vim.keymap.set(
-	{ "n" },
-	"<Leader>gc",
-	cmd("lua require('telescope').extensions.git_worktree.create_git_worktree()"),
-	{ silent = true }
-)
-
--- Vim test
-vim.keymap.set({ "n" }, "tn", cmd("TestNearest"), { silent = true })
-vim.keymap.set({ "n" }, "tf", cmd("TestFile"), { silent = true })
-vim.keymap.set({ "n" }, "ts", cmd("TestSuite"), { silent = true })
+-- Diagnostics
+map("n", "<A-[>", vim.diagnostic.goto_prev, "Previous diagnostic")
+map("n", "<A-]>", vim.diagnostic.goto_next, "Next diagnostic")
 
 -- =============================================================================
 -- === VISUAL MODE =============================================================
 -- =============================================================================
---  Maintain visual mode after shifting > and <
-vim.keymap.set({ "v" }, "<", "<gv", { silent = true })
-vim.keymap.set({ "v" }, ">", ">gv", { silent = true })
 
--- Move visual block
-vim.keymap.set({ "v" }, "K", ":m '<-2<CR>gv=gv", { silent = true })
-vim.keymap.set({ "v" }, "J", ":m '>+1<CR>gv=gv", { silent = true })
+map("v", "<", "<gv", "Indent left (stay in visual)")
+map("v", ">", ">gv", "Indent right (stay in visual)")
+map("v", "K", ":m '<-2<CR>gv=gv", "Move selection up")
+map("v", "J", ":m '>+1<CR>gv=gv", "Move selection down")
 
--- Undo breakpoints. Pressing u will take these breakpoints into consideration.
-vim.cmd([[
-  inoremap , ,<c-g>u
-  inoremap . .<c-g>u
-  inoremap ! !<c-g>u
-  inoremap ? ?<c-g>u
-]])
+-- =============================================================================
+-- === INSERT MODE =============================================================
+-- =============================================================================
 
--- Mutate the jumplist when we move more than 5 lines
-vim.cmd([[
-  nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-  nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
-]])
+-- Undo breakpoints at punctuation
+map("i", ",", ",<c-g>u", "Undo breakpoint at comma")
+map("i", ".", ".<c-g>u", "Undo breakpoint at period")
+map("i", "!", "!<c-g>u", "Undo breakpoint at exclamation")
+map("i", "?", "?<c-g>u", "Undo breakpoint at question mark")
+
+-- =============================================================================
+-- === EXPRESSION MAPPINGS =====================================================
+-- =============================================================================
+
+-- Mutate the jumplist when moving more than 5 lines
+vim.keymap.set("n", "k", function()
+	return (vim.v.count > 5 and "m'" .. vim.v.count or "") .. "k"
+end, { expr = true, silent = true, desc = "Up (jumplist if >5 lines)" })
+
+vim.keymap.set("n", "j", function()
+	return (vim.v.count > 5 and "m'" .. vim.v.count or "") .. "j"
+end, { expr = true, silent = true, desc = "Down (jumplist if >5 lines)" })

@@ -1,7 +1,6 @@
 return {
 	"feline-nvim/feline.nvim",
 	config = function()
-		require("plugins.feline")
 		local theme = string.sub(vim.fn.system("tmux show-environment THEME"), 7):gsub("%s+$", "")
 		local function getColors()
 			if theme == "dark" then
@@ -125,16 +124,16 @@ return {
 						end
 						local title = Lsp.title or ""
 						local spinners = {
-							"",
-							"",
-							"",
+							"",
+							"",
+							"",
 						}
 						local success_icon = {
-							"",
-							"",
-							"",
+							"",
+							"",
+							"",
 						}
-						local ms = vim.loop.hrtime() / 1000000
+						local ms = vim.uv.hrtime() / 1000000
 						local frame = math.floor(ms / 120) % #spinners
 
 						if percentage >= 70 then

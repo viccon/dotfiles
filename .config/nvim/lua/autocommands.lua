@@ -1,11 +1,5 @@
 local api = vim.api
 
--- Auto compile the plugins whenever we do changes
-api.nvim_create_autocmd("BufWritePost", {
-	pattern = "plugins.lua",
-	command = "source <afile> | PackerCompile",
-})
-
 -- Resize vim windows when window size changes, usually caused by opening a tmux split
 api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
@@ -18,20 +12,15 @@ api.nvim_create_autocmd("BufWritePre", {
 	command = "%s/\\s\\+$//e",
 })
 
--- Set filetype to markdown for .md files and enable spell check
-api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.md",
-	command = "set filetype=markdown",
-})
-
-api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.md",
+-- Enable spell check for markdown files
+api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
 	command = "setlocal spell spelllang=en_us",
 })
 
--- Set filetype to cmake for
+-- Set filetype to cmake for CMakeLists.txt
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "CmakeLists.txt"},
+	pattern = { "CMakeLists.txt" },
 	command = "set ft=cmake",
 })
 
@@ -41,25 +30,8 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	command = "set ft=json",
 })
 
--- Set filetype to scss for .scss and .scssm files
-api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.scss",
-	command = "set filetype=scss",
-})
-
-api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.scssm",
-	command = "set filetype=scss",
-})
-
--- Set filetype to .gitconfig for gitconfig files
+-- Set filetype to gitconfig for gitconfig files
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "gitconfig",
-	command = "set ft=.gitconfig",
-})
-
--- Set filetype to typescript.tsx for .tsx files
-api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.tsx",
-	command = "set filetype=typescript.tsx",
+	command = "set ft=gitconfig",
 })
