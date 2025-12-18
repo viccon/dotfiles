@@ -34,6 +34,7 @@ WANTED_PACKAGES=(
 	borders
 	btop
 	ccache
+	clang-format
 	coreutils
 	direnv
 	dive

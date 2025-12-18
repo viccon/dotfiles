@@ -19,6 +19,8 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				go = { "goimports", "gofmt" },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
 			},
 		})
 
