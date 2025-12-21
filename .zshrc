@@ -161,8 +161,6 @@ fpath=($fpath "/home/conner/.zfunctions")
 # zsh functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-export XDG_CONFIG_HOME=$HOME/.config
-
 # Set starship ZSH as a prompt
 eval "$(starship init zsh)"
 
