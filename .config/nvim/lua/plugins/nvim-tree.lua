@@ -1,5 +1,6 @@
 return {
 	"kyazdani42/nvim-tree.lua",
+	cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle", "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeClose" },
 	keys = {
 		{ "<F2>", "<cmd>NvimTreeFindFileToggle!<CR>", desc = "Find file in tree" },
 		{ "<F3>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },

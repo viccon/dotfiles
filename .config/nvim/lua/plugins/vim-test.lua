@@ -1,6 +1,7 @@
 return {
 	"vim-test/vim-test",
 	dependencies = { "preservim/vimux" },
+	cmd = { "TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit" },
 	keys = {
 		{ "tn", "<cmd>TestNearest<CR>", desc = "Test nearest" },
 		{ "tf", "<cmd>TestFile<CR>", desc = "Test file" },

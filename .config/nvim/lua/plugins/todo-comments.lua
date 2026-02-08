@@ -1,6 +1,8 @@
 return {
 	"folke/todo-comments.nvim",
 	dependencies = "nvim-telescope/telescope.nvim",
+	event = { "BufReadPost", "BufNewFile" },
+	cmd = { "TodoTelescope", "TodoQuickFix", "TodoLocList", "TodoTrouble" },
 	keys = {
 		{ "|", "<cmd>TodoTelescope<CR>", desc = "Search TODOs" },
 	},
