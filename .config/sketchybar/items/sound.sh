@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SOUND=(
+  update_freq=120
   script="$PLUGIN_DIR/sound.sh"
 )
 
