@@ -20,3 +20,6 @@ yarn-error.log
 node_modules
 nvim/autoload
 terminal/nvim/plugged
+
+.config/github-copilot/versions.json
+.config/nvim/lazy-lock.json
