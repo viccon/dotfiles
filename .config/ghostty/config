@@ -1,5 +1,6 @@
 # DARK
 keybind = super+shift+r=reload_config
+keybind = shift+enter=text:\x1b\r
 
 macos-option-as-alt = true
 clipboard-read = "allow"
